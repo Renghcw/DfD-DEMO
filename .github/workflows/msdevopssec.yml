@@ -1,29 +1,36 @@
-# My Microsoft Security DevOps (MSDO) Terrascan workflow
 name: MSDO windows-latest
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  MSDO:
-    # MSDO runs on windows-latest and ubuntu-latest.
-    # macos-latest supporting coming soon
+  sample:
+    name: Microsoft Security DevOps Analysis
+
+    # MSDO runs on windows-latest.
+    # ubuntu-latest and macos-latest supporting coming soon
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      # Run MSDO analyzers
-      - name: Run Microsoft Security DevOps Analysis
-        uses: microsoft/security-devops-action@preview
-        id: msdo
-        env:
-          terrascan_scan: 'scan'
-          terrascan_outputtype: 'sarif'
-          terrascan_iacdir: '01_foundations'
+      # Checkout your code repository to scan
+    - uses: actions/checkout@v3
+
+      # Run analyzers
+    - name: Run Microsoft Security DevOps Analysis
+      uses: microsoft/security-devops-action@preview
+      id: msdo
 
       # Upload alerts to the Security tab
-      - name: Upload alerts to Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+    - name: Upload alerts to Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+
+      # Upload alerts file as a workflow artifact
+    - name: Upload alerts file as a workflow artifact
+      uses: actions/upload-artifact@v3
+      with:  
+        name: alerts
+        path: ${{ steps.msdo.outputs.sarifFile }}
