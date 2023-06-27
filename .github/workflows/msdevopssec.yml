@@ -20,7 +20,7 @@ jobs:
         env:
           terrascan_scan: 'scan'
           terrascan_outputtype: 'sarif'
-          terrascan_iacdir: '01_Foundation'
+          terrascan_iacdir: '01_foundations'
 
       # Upload alerts to the Security tab
       - name: Upload alerts to Security tab
