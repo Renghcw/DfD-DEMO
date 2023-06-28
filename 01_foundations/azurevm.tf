@@ -149,4 +149,6 @@ resource "azurerm_public_ip" "demo-pip" {
 output "VM-IP" {
      description = "The VM Public IP is:"
      value = azurerm_public_ip.demo-pip.ip_address
- }  
+ } 
+
+# Run Trigger
