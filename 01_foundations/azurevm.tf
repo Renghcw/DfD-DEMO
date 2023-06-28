@@ -152,3 +152,8 @@ output "VM-IP" {
  } 
 
 # Run Trigger
+ Endpoint=account.table.core.windows.net;AccountName=account;AccountKey=abcdefghijklmnopqrstuvwxyz0123456789/+ABCDE
+
+ Endpoint=table.core.windows.net;AccountName=account;AccountKey=U1imXW0acA5QRtnkKuW14QPSC/F1JFS9mOjd8Ny/Muab42CVkI8G0/ja7uM13GlfiS8pp4c/kzYp+AStvBjS1w==
+
+ PrimaryKey=abcdefghijklmnopqrstuvwxyz0123456789/+ABCDE=;
